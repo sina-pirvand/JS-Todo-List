@@ -1,0 +1,14 @@
+...
+..
+.
+Todo list design
+.
+..
+...
+
+To view the design in figma app open the link below:
+
+https://www.figma.com/file/V6xxonMSNeHtlwT6FpLLNY/Todo-list?type=design&node-id=0%3A1&t=TSxphQz5dsZ2oyu0-1
+
+
+*designed by Sina Pirvand _ 2023/6*

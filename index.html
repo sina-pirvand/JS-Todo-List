@@ -6,8 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>todo list</title>
     <link rel="stylesheet" href="styles.css" />
+    <!-- <link
+      rel="stylesheet"
+      href="Libs/bootstrap-5.3.0-alpha3-dist/css/bootstrap.min.css"
+    /> -->
   </head>
   <body>
+    <section class="container">
+      <header>
+        <div class="header">
+          <h2>Todo List</h2>
+        </div>
+        <div class="new-todo">
+          <form id="todoform">
+            <input
+              type="text"
+              name="newtodo"
+              id="newtodo"
+              placeholder="add to-do"
+            />
+            <button type="submit">+</button>
+          </form>
+        </div>
+      </header>
+      <div id="todos-list"></div>
+    </section>
     <script src="scripts.js"></script>
+    <!-- <script src="/Libs/bootstrap-5.3.0-alpha3-dist/js/bootstrap.bundle.min.js"></script> -->
   </body>
 </html>
