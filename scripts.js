@@ -5,9 +5,14 @@ const todosList = document.querySelector("#todos-list");
 const notifContainer = document.querySelector(".notification");
 
 //! variables
+//* when using the app for the 1st time, the storage is empty, then it's falsy so [] we'll be chosen
 let todos = JSON.parse(localStorage.getItem("todosList")) || [];
+
 //* cuz editTodoId will always be 0,1,2,3,... in editTodo function (cuz todoId is array index) and -1 means we're not editing
 let editTodoId = -1;
+
+//! first render
+renderTodos();
 
 //! prevent form from submiting and refreshing our page
 form.addEventListener("submit", (e) => {
