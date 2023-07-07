@@ -2,9 +2,10 @@
 const form = document.querySelector("#todoform");
 const todoInp = document.querySelector("#newtodo");
 const todosList = document.querySelector("#todos-list");
+const notifContainer = document.querySelector(".notification");
 
 //! variables
-let todos = [];
+let todos = JSON.parse(localStorage.getItem("todosList")) || [];
 //* cuz editTodoId will always be 0,1,2,3,... in editTodo function (cuz todoId is array index) and -1 means we're not editing
 let editTodoId = -1;
 
@@ -15,6 +16,8 @@ form.addEventListener("submit", (e) => {
   saveTodo();
   //* render todos
   renderTodos();
+  //* update local storage each time after adding a todo
+  localStorage.setItem("todosList", JSON.stringify(todos));
   //* clear input value after add or edit a todo
   todoInp.value = "";
 });
@@ -32,9 +35,9 @@ function saveTodo() {
   );
 
   if (isEmpty) {
-    alert("input is empty");
+    showNotif("input is empty");
   } else if (isDuplicate) {
-    alert("Todo is duplicate");
+    showNotif("Todo is duplicate");
     console.log(456);
   }
   //* check if Todo is being edited
@@ -128,6 +131,8 @@ function checkTodo(todoId) {
     checked: idx === todoId ? !el.checked : el.checked,
   }));
   renderTodos();
+  //* should add this everywhere we render todo cuz we need update local storage
+  localStorage.setItem("todosList", JSON.stringify(todos));
 }
 
 //*
@@ -148,4 +153,14 @@ function deleteTodo(todoId) {
 
   //* Re-render the list
   renderTodos();
+  localStorage.setItem("todosList", JSON.stringify(todos));
+}
+
+//! Show notification
+function showNotif(msg) {
+  notifContainer.innerHTML = msg;
+  notifContainer.classList.add("notif-enter");
+  setTimeout(() => {
+    notifContainer.classList.remove("notif-enter");
+  }, 2000);
 }
