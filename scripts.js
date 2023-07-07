@@ -5,7 +5,7 @@ const todosList = document.querySelector("#todos-list");
 
 //! variables
 let todos = [];
-// cuz editTodoId will always be 0,1,2,3,... in editTodo function (cuz todoId is array index) and -1 means we're not editing
+//* cuz editTodoId will always be 0,1,2,3,... in editTodo function (cuz todoId is array index) and -1 means we're not editing
 let editTodoId = -1;
 
 //! prevent form from submiting and refreshing our page
@@ -15,6 +15,8 @@ form.addEventListener("submit", (e) => {
   saveTodo();
   //* render todos
   renderTodos();
+  //* clear input value after add or edit a todo
+  todoInp.value = "";
 });
 
 //! save Todo
@@ -33,9 +35,19 @@ function saveTodo() {
     alert("input is empty");
   } else if (isDuplicate) {
     alert("Todo is duplicate");
+    console.log(456);
   }
-  if (ed) {
+  //* check if Todo is being edited
+  else if (editTodoId >= 0) {
+    todos = todos.map((el, idx) => ({
+      ...el,
+      //* the value for edited element will be changed and others stay the same
+      value: idx === editTodoId ? todoVal : el.value,
+    }));
+    //* always reset editTodoId to -1 for next cases
+    editTodoId = -1;
   } else {
+    console.log("123");
     const todo = {
       value: todoVal,
       checked: false,
@@ -79,8 +91,12 @@ todosList.addEventListener("click", (e) => {
 
   //* target action attribute
   const action = e.target.dataset.action;
+
+  //* Check
   action === "check" && checkTodo(todoId);
-  console.log(action, todoId);
+
+  //* Edit
+  action === "edit" && editTodo(todoId);
 });
 
 //! check a Todo
@@ -116,5 +132,5 @@ function checkTodo(todoId) {
 //! Edit Todo
 function editTodo(todoId) {
   todoInp.value = todos[todoId].value;
-  editTodoId = editTodo;
+  editTodoId = todoId;
 }
