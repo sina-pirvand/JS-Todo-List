@@ -97,6 +97,9 @@ todosList.addEventListener("click", (e) => {
 
   //* Edit
   action === "edit" && editTodo(todoId);
+
+  //* Delete
+  action === "delete" && deleteTodo(todoId);
 });
 
 //! check a Todo
@@ -133,4 +136,16 @@ function checkTodo(todoId) {
 function editTodo(todoId) {
   todoInp.value = todos[todoId].value;
   editTodoId = todoId;
+}
+
+//! Delete Todo
+function deleteTodo(todoId) {
+  //* returns all todos exept those which their index isn't equal to todoId
+  todos = todos.filter((el, idx) => idx !== todoId);
+
+  //* reset editTodoId to -1
+  editTodoId = -1;
+
+  //* Re-render the list
+  renderTodos();
 }
