@@ -70,8 +70,15 @@ function saveTodo() {
 
 //! render todo
 function renderTodos() {
+  //* a message for the times that todo list is empty
+  if (todos.length === 0) {
+    todosList.innerHTML = `<p>You don't have any todos</p>`;
+    return;
+  }
+
   //* clear list befor re-rendering new items
   todosList.innerHTML = "";
+
   //* render items
   todos.forEach((el, idx) => {
     todosList.innerHTML += `
@@ -79,7 +86,9 @@ function renderTodos() {
     <img src=${
       el.checked ? "assets/icon/checkedcircle.svg" : "assets/icon/circle.svg"
     } alt=${el.checked ? "checked icon" : "circle icon"} data-action="check" />
-    <span data-action="check">${el.value}</span>
+    <span class="${el.checked ? "checked" : ""}" data-action="check">${
+      el.value
+    }</span>
     <img src="assets/icon/edit.svg" alt="edit icon" data-action="edit" />
     <img src="assets/icon/trash.svg" alt="trash icon" data-action="delete" />
   </div>
