@@ -165,8 +165,13 @@ header {
 :root {
   --header-color: #b236ec;
   --title-color: #ffbb53;
-  --title-color-secondary: #ddd;
+  --gray-color-secondary: #ddd;
+  --gray-color-light: #f6f6f6;
   --bg-color-primary: #fff;
+  --text-color-gray: #888;
+  --active-task-text: #333;
+  --completed-task-text: #aaa;
+  --form-bg-color: #f8f8f8;
 }
 
 /* ! general */
@@ -175,16 +180,23 @@ header {
 }
 
 /* ! header */
-
+body {
+  overflow: hidden;
+}
 main {
   width: 100%;
-  border-radius: 1rem 1rem 0 0;
+  border-radius: 0;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .header {
   background-color: var(--header-color);
   border-radius: 0 0 3rem 0;
   padding-bottom: 6rem;
+  position: sticky;
+  left: 0;
+  top: 0;
 }
 
 .main-title {
@@ -192,7 +204,7 @@ main {
 }
 
 .text-secondary-color {
-  color: var(--title-color-secondary);
+  color: var(--gray-color-secondary);
 }
 
 .profile-img-container {
@@ -206,14 +218,61 @@ main {
 
 /* !section */
 
+.filters {
+  color: var(--text-color-gray);
+}
+
+.filters.active {
+  color: var(--title-color);
+}
+
+.tasks-list-container {
+  height: 60vh;
+  overflow-y: auto;
+}
+
+.task {
+  background-color: var(--gray-color-light);
+}
+
+.task span {
+  color: var(--active-task-text);
+}
+
+.task.checked {
+  background-color: var(--gray-color-secondary);
+}
+
+.task.task.checked span {
+  color: var(--completed-task-text);
+  text-decoration: line-through;
+}
+
+/* !form */
+
+.new-todo {
+  background-color: var(--form-bg-color);
+  position: sticky;
+  left: 0;
+  bottom: 0;
+}
+
+input {
+  color: var(--active-task-text);
+}
+
+input:focus {
+  outline: none;
+}
+
 /* !-------------------------------------- */
 /* ! MEDIA QUERRIES */
 /* !-------------------------------------- */
 
-@media (min-width: 576px) {
-}
-
 @media (min-width: 768px) {
+  .tasks-list-container {
+    height: 80vh;
+  }
 }
 
 @media (min-width: 992px) {
@@ -224,10 +283,9 @@ main {
   .header {
     border-radius: 1rem 1rem 3rem 0;
   }
-}
 
-@media (min-width: 1200px) {
-}
-
-@media (min-width: 1400px) {
+  main {
+    border-radius: 1rem 1rem 0;
+    height: 90vh;
+  }
 }
