@@ -96,7 +96,7 @@
 //   });
 // }
 
-// //! click event listener for eacg Todo
+// //! click event listener for each Todo
 // todosList.addEventListener("click", (e) => {
 //   //* reach parent element of clicked target
 //   const parentElement = e.target.parentNode;
@@ -179,6 +179,94 @@
 //   }, 2000);
 // }
 
+//! elements selection
+const form = document.querySelector("#todo-form");
+const todoInp = document.querySelector("#newtodo-input");
+const todosList = document.querySelector(".tasks-list-container");
+const gChilds = document.querySelectorAll(".g-child");
+// const notifContainer = document.querySelector(".notification");
+
+//! VARIABLES
+let todos = [];
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  saveTodo();
+  renderTodo();
+});
+
+//! SAVE TODO
+function saveTodo() {
+  const todoInputVal = todoInp.value;
+  //   //* check if input is empty
+  const isEmpty = todoInputVal === "";
+  //   //* check if Todo is duplicate
+  const isDuplicate = todos.some(
+    (todo) => todo.value.toLowerCase() === todoInputVal.toLowerCase()
+  );
+
+  if (isEmpty) {
+    alert("empty");
+  } else if (isDuplicate) {
+    alert("duplicate");
+  } else {
+    todos.push({
+      value: todoInputVal,
+      checked: false,
+    });
+  }
+}
+
+//! RENDER TODO
+function renderTodo() {
+  //* Clear container before a re-render
+  todosList.innerHTML = "";
+
+  //* render todos
+  todos.forEach((el, idx) => {
+    todosList.innerHTML += `
+  <div
+  class="task d-flex align-items-center p-3 mx-2 mx-lg-4 mb-1 rounded-3"
+  id= ${`task-${idx + 1}`}
+>
+  <img
+    class="cursor-pointer"
+    src=${
+      el.checked ? "assets/icon/checkedcircle.svg" : "assets/icon/circle.svg"
+    } alt=${el.checked ? "checked icon" : "circle icon"}
+  />
+  <span class="mx-2 cursor-pointer w-100">${el.value}</span>
+
+  <img
+    class="cursor-pointer ml-auto"
+    src="assets/icon/edit.svg"
+    alt="edit icon"
+  />
+  <img
+    class="cursor-pointer mx-1"
+    src="assets/icon/trash.svg"
+    alt="delete icon"
+  />
+</div>
+    `;
+  });
+}
+
+//!
+todosList.addEventListener("click", (e) => {
+  //* reach parent element of clicked target
+  const parentElement = e.target.parentNode;
+  console.log(e.target.parentNode);
+  //* if the className isn't task, finish the function
+  if (parentElement.className !== "task") return;
+  //* get todo id
+  const todoId = Number(parentElement.id);
+  //* get target action attribute
+  const action = e.target.dataset.action;
+  console.log(action);
+});
+
+//! DarK/light mode
 const theme = document.querySelector("#theme-toggle");
 const body = document.querySelector("body");
 
