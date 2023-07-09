@@ -14,32 +14,9 @@
   <body
     class="d-flex align-items-center justify-content-center flex-column p-0 p-lg-4 bg-body-secondary"
   >
-    <!-- <section class="container">
-      <header>
-        <div class="header">
-          <h2>Todo List</h2>
-        </div>
-        <div class="new-todo">
-          <form id="todoform">
-            <input
-              type="text"
-              name="newtodo"
-              id="newtodo"
-              placeholder="add to-do"
-            />
-            <button type="submit">+</button>
-          </form>
-        </div>
-      </header>
-      <div id="todos-list"></div>
-      <div class="notification"></div>
-    </section> -->
     <main
       class="mx-auto bg-color-primary position-relative d-flex flex-column justify-content-between"
     >
-      <!-- <main
-      class="d-flex justify-content-center flex-column mx-auto bg-color-primary"
-    > -->
       <header
         class="header w-100 d-flex align-items-center justify-content-between"
       >
@@ -63,13 +40,13 @@
         <!-- !-------------------------------------------- -->
 
         <div class="d-flex align-items-center justify-content-between mb-4">
-          <div>
-            <span class="px-4 filters active">All</span>
-            <span class="px-4 filters">Done</span>
-            <span class="px-4 filters">Active</span>
-          </div>
-          <figure class="mx-3 my-1">
-            <img src="assets/icon/sun.svg" alt="light mode" />
+          <ul class="d-flex align-items-center list-unstyled py-2">
+            <li class="px-4 filters cursor-pointer active">All</li>
+            <li class="px-4 filters cursor-pointer">Done</li>
+            <li class="px-4 filters cursor-pointer">Active</li>
+          </ul>
+          <figure class="mx-3 cursor-pointer">
+            <img src="assets/icon/sun.svg" alt="light mode" id="theme-toggle" />
           </figure>
         </div>
 
@@ -82,7 +59,7 @@
           >
             <div>
               <img src="assets/icon/circle.svg" alt="circle icon" />
-              <span>lorem ipsum dollar sit</span>
+              <span>lorem ipsum dollar sit 1</span>
             </div>
             <div>
               <img src="assets/icon/edit.svg" alt="edit icon" />
@@ -94,7 +71,7 @@
           >
             <div>
               <img src="assets/icon/circle.svg" alt="circle icon" />
-              <span>lorem ipsum dollar sit</span>
+              <span>lorem ipsum dollar sit 2</span>
             </div>
             <div>
               <img src="assets/icon/edit.svg" alt="edit icon" />
@@ -106,7 +83,7 @@
           >
             <div>
               <img src="assets/icon/circle.svg" alt="circle icon" />
-              <span>lorem ipsum dollar sit</span>
+              <span>lorem ipsum dollar sit 3</span>
             </div>
             <div>
               <img src="assets/icon/edit.svg" alt="edit icon" />
@@ -118,7 +95,7 @@
           >
             <div>
               <img src="assets/icon/circle.svg" alt="circle icon" />
-              <span>lorem ipsum dollar sit</span>
+              <span>lorem ipsum dollar sit 4</span>
             </div>
             <div>
               <img src="assets/icon/edit.svg" alt="edit icon" />
@@ -130,7 +107,7 @@
           >
             <div>
               <img src="assets/icon/circle.svg" alt="circle icon" />
-              <span>lorem ipsum dollar sit</span>
+              <span>lorem ipsum dollar sit 5</span>
             </div>
             <div>
               <img src="assets/icon/edit.svg" alt="edit icon" />
@@ -142,7 +119,7 @@
           >
             <div>
               <img src="assets/icon/circle.svg" alt="circle icon" />
-              <span>lorem ipsum dollar sit</span>
+              <span>lorem ipsum dollar sit 6</span>
             </div>
             <div>
               <img src="assets/icon/edit.svg" alt="edit icon" />
@@ -154,7 +131,7 @@
           >
             <div>
               <img src="assets/icon/circle.svg" alt="circle icon" />
-              <span>lorem ipsum dollar sit</span>
+              <span>lorem ipsum dollar sit 7</span>
             </div>
             <div>
               <img src="assets/icon/edit.svg" alt="edit icon" />
@@ -166,7 +143,7 @@
           >
             <div>
               <img src="assets/icon/circle.svg" alt="circle icon" />
-              <span>lorem ipsum dollar sit</span>
+              <span>lorem ipsum dollar sit 8</span>
             </div>
             <div>
               <img src="assets/icon/edit.svg" alt="edit icon" />
@@ -178,7 +155,7 @@
           >
             <div>
               <img src="assets/icon/circle.svg" alt="circle icon" />
-              <span>lorem ipsum dollar sit</span>
+              <span>lorem ipsum dollar sit 9</span>
             </div>
             <div>
               <img src="assets/icon/edit.svg" alt="edit icon" />
@@ -190,7 +167,7 @@
           >
             <div>
               <img src="assets/icon/circle.svg" alt="circle icon" />
-              <span>lorem ipsum dollar sit</span>
+              <span>lorem ipsum dollar sit 10</span>
             </div>
             <div>
               <img src="assets/icon/edit.svg" alt="edit icon" />
@@ -202,7 +179,7 @@
           >
             <div>
               <img src="assets/icon/circle.svg" alt="circle icon" />
-              <span>lorem ipsum dollar sit</span>
+              <span>lorem ipsum dollar sit 11</span>
             </div>
             <div>
               <img src="assets/icon/edit.svg" alt="edit icon" />
@@ -214,7 +191,7 @@
           >
             <div>
               <img src="assets/icon/circle.svg" alt="circle icon" />
-              <span>lorem ipsum dollar sit</span>
+              <span>lorem ipsum dollar sit 12</span>
             </div>
             <div>
               <img src="assets/icon/edit.svg" alt="edit icon" />
@@ -226,7 +203,7 @@
           >
             <div>
               <img src="assets/icon/circle.svg" alt="circle icon" />
-              <span>lorem ipsum dollar sit</span>
+              <span>lorem ipsum dollar sit 13</span>
             </div>
             <div>
               <img src="assets/icon/edit.svg" alt="edit icon" />
@@ -238,7 +215,7 @@
           >
             <div>
               <img src="assets/icon/circle.svg" alt="circle icon" />
-              <span>lorem ipsum dollar sit</span>
+              <span>lorem ipsum dollar sit 14</span>
             </div>
             <div>
               <img src="assets/icon/edit.svg" alt="edit icon" />
@@ -250,7 +227,7 @@
           >
             <div>
               <img src="assets/icon/circle.svg" alt="circle icon" />
-              <span>lorem ipsum dollar sit</span>
+              <span>lorem ipsum dollar sit 15</span>
             </div>
             <div>
               <img src="assets/icon/edit.svg" alt="edit icon" />
@@ -262,7 +239,7 @@
           >
             <div>
               <img src="assets/icon/circle.svg" alt="circle icon" />
-              <span>lorem ipsum dollar sit</span>
+              <span>lorem ipsum dollar sit 16</span>
             </div>
             <div>
               <img src="assets/icon/edit.svg" alt="edit icon" />
@@ -274,7 +251,7 @@
           >
             <div>
               <img src="assets/icon/circle.svg" alt="circle icon" />
-              <span>lorem ipsum dollar sit</span>
+              <span>lorem ipsum dollar sit 17</span>
             </div>
             <div>
               <img src="assets/icon/edit.svg" alt="edit icon" />
@@ -286,7 +263,7 @@
           >
             <div>
               <img src="assets/icon/circle.svg" alt="circle icon" />
-              <span>lorem ipsum dollar sit</span>
+              <span>lorem ipsum dollar sit 18</span>
             </div>
             <div>
               <img src="assets/icon/edit.svg" alt="edit icon" />
@@ -298,7 +275,7 @@
           >
             <div>
               <img src="assets/icon/circle.svg" alt="circle icon" />
-              <span>lorem ipsum dollar sit</span>
+              <span>lorem ipsum dollar sit 19</span>
             </div>
             <div>
               <img src="assets/icon/edit.svg" alt="edit icon" />
@@ -310,7 +287,7 @@
           >
             <div>
               <img src="assets/icon/circle.svg" alt="circle icon" />
-              <span>lorem ipsum dollar sit</span>
+              <span>lorem ipsum dollar sit 20</span>
             </div>
             <div>
               <img src="assets/icon/edit.svg" alt="edit icon" />
@@ -322,7 +299,7 @@
           >
             <div>
               <img src="assets/icon/checkedcircle.svg" alt="circle icon" />
-              <span>lorem ipsum dollar sit</span>
+              <span>lorem ipsum dollar sit 21</span>
             </div>
             <div>
               <img src="assets/icon/edit.svg" alt="edit icon" />
@@ -351,7 +328,7 @@
     <!--! Scripts -->
     <!-- !-------------------------------------------- -->
 
-    <!-- <script src="scripts.js"></script> -->
+    <script src="scripts.js"></script>
     <script src="/Libs/bootstrap-5.3.0-alpha3-dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
