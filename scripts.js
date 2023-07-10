@@ -183,12 +183,14 @@
 const form = document.querySelector("#todo-form");
 const todoInp = document.querySelector("#newtodo-input");
 const todosList = document.querySelector(".tasks-list-container");
-const gChilds = document.querySelectorAll(".g-child");
 // const notifContainer = document.querySelector(".notification");
 
 //! VARIABLES
 let todos = [];
+//* cuz editTodoId will always be 0,1,2,3,... in editTodo function (cuz todoId is array index) and -1 means we're not editing
+let editTodoId = -1;
 
+//! FORM SUBMITION EVENT
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   saveTodo();
@@ -198,9 +200,9 @@ form.addEventListener("submit", (e) => {
 //! SAVE TODO
 function saveTodo() {
   const todoInputVal = todoInp.value;
-  //   //* check if input is empty
+  //* check if input is empty
   const isEmpty = todoInputVal === "";
-  //   //* check if Todo is duplicate
+  //* check if Todo is duplicate
   const isDuplicate = todos.some(
     (todo) => todo.value.toLowerCase() === todoInputVal.toLowerCase()
   );
@@ -209,6 +211,14 @@ function saveTodo() {
     alert("empty");
   } else if (isDuplicate) {
     alert("duplicate");
+  }
+  //* check for editing
+  else if (editTodoId >= 0) {
+    todos = todos.map((el, idx) => ({
+      ...el,
+      value: idx === editTodoId ? todoInputVal : el.value,
+    }));
+    editTodoId = -1;
   } else {
     todos.push({
       value: todoInputVal,
@@ -227,44 +237,99 @@ function renderTodo() {
     todosList.innerHTML += `
   <div
   class="task d-flex align-items-center p-3 mx-2 mx-lg-4 mb-1 rounded-3"
-  id= ${`task-${idx + 1}`}
+  id= ${`task-${idx}`}
 >
   <img
     class="cursor-pointer"
     src=${
       el.checked ? "assets/icon/checkedcircle.svg" : "assets/icon/circle.svg"
-    } alt=${el.checked ? "checked icon" : "circle icon"}
+    } alt=${el.checked ? "checked icon" : "circle icon"} data-action = "check"
   />
-  <span class="mx-2 cursor-pointer w-100">${el.value}</span>
+  <span class="mx-2 cursor-pointer w-100" data-action = "check">${
+    el.value
+  }</span>
 
   <img
     class="cursor-pointer ml-auto"
     src="assets/icon/edit.svg"
     alt="edit icon"
+    data-action = "edit"
   />
   <img
     class="cursor-pointer mx-1"
     src="assets/icon/trash.svg"
     alt="delete icon"
+    data-action = "delete"
   />
 </div>
     `;
   });
 }
 
-//!
+//! todos list click listener
 todosList.addEventListener("click", (e) => {
   //* reach parent element of clicked target
   const parentElement = e.target.parentNode;
-  console.log(e.target.parentNode);
   //* if the className isn't task, finish the function
-  if (parentElement.className !== "task") return;
-  //* get todo id
-  const todoId = Number(parentElement.id);
+  if (!parentElement.classList.contains("task")) return;
+  //* get todo id numeric part (needs to be converted from string to number)
+  const todoId = Number(parentElement.id.slice(-1));
   //* get target action attribute
   const action = e.target.dataset.action;
-  console.log(action);
+  //* operations depending to action
+  //* Check
+  action === "check" && checkTodo(todoId);
+  //* Edit
+  action === "edit" && editTodo(todoId);
+  //* Delete
+  action === "delete" && deleteTodo(todoId);
 });
+
+//! check a Todo
+//* fisrt code
+// function checkTodo(todoId) {
+//   let newArr = todos.map((el, idx) => {
+//     if (idx === todoId) {
+//       return {
+//         value: el.value,
+//         checked: !el.checked,
+//       };
+//     } else {
+//       return {
+//         value: el.value,
+//         checked: el.checked,
+//       };
+//     }
+//   });
+//   todos = newArr;
+// }
+//* refactored code
+function checkTodo(todoId) {
+  todos = todos.map((el, idx) => ({
+    ...el,
+    checked: idx === todoId ? !el.checked : el.checked,
+  }));
+  renderTodo();
+}
+
+//! Edit Todo
+function editTodo(todoId) {
+  todoInp.value = todos[todoId].value;
+  editTodoId = todoId;
+}
+
+//! DELETE TODO
+function deleteTodo(todoId) {
+  //* returns all todos exept those which their index isn't equal to todoId
+  todos = todos.filter((el, idx) => idx !== todoId);
+
+  //* reset editTodoId to -1
+  //* to prevent editing next todo when delete current todo while it was being edited
+  editTodoId = -1;
+
+  //* Re-render the list
+  renderTodo();
+}
 
 //! DarK/light mode
 const theme = document.querySelector("#theme-toggle");
