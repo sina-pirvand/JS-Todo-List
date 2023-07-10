@@ -186,7 +186,8 @@ const todosList = document.querySelector(".tasks-list-container");
 // const notifContainer = document.querySelector(".notification");
 
 //! VARIABLES
-let todos = [];
+//* when using the app for the 1st time, the storage is empty, then it's falsy so [] we'll be chosen
+let todos = JSON.parse(localStorage.getItem("todosList")) || [];
 //* cuz editTodoId will always be 0,1,2,3,... in editTodo function (cuz todoId is array index) and -1 means we're not editing
 let editTodoId = -1;
 
@@ -195,7 +196,14 @@ form.addEventListener("submit", (e) => {
   e.preventDefault();
   saveTodo();
   renderTodo();
+  //* update local storage each time after adding a todo
+  localStorage.setItem("todosList", JSON.stringify(todos));
+  //* clear input value after add or edit a todo
+  todoInp.value = "";
 });
+
+//! FIRST RENDER
+renderTodo();
 
 //! SAVE TODO
 function saveTodo() {
@@ -310,6 +318,8 @@ function checkTodo(todoId) {
     checked: idx === todoId ? !el.checked : el.checked,
   }));
   renderTodo();
+  //* should add this everywhere we render todo cuz we need update local storage
+  localStorage.setItem("todosList", JSON.stringify(todos));
 }
 
 //! Edit Todo
@@ -329,6 +339,8 @@ function deleteTodo(todoId) {
 
   //* Re-render the list
   renderTodo();
+
+  localStorage.setItem("todosList", JSON.stringify(todos));
 }
 
 //! DarK/light mode
