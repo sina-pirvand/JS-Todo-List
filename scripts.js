@@ -184,6 +184,16 @@ const form = document.querySelector("#todo-form");
 const todoInp = document.querySelector("#newtodo-input");
 const todosList = document.querySelector(".tasks-list-container");
 // const notifContainer = document.querySelector(".notification");
+const theme = document.querySelector("#theme-toggle");
+const body = document.querySelector("body");
+const video = document.querySelector("#video");
+const filterAll = document.querySelector("#filter-all");
+const filterDone = document.querySelector("#filter-done");
+const filterPending = document.querySelector("#filter-pending");
+const filters = document.querySelectorAll(".filter");
+const filtersArr = [...filters];
+let pendingTodos = [];
+let doneTodos = [];
 
 //! VARIABLES
 //* when using the app for the 1st time, the storage is empty, then it's falsy so [] we'll be chosen
@@ -195,7 +205,8 @@ let editTodoId = -1;
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   saveTodo();
-  renderTodo();
+  filterAll.click();
+  renderTodo(todos);
   //* update local storage each time after adding a todo
   localStorage.setItem("todosList", JSON.stringify(todos));
   //* clear input value after add or edit a todo
@@ -203,7 +214,7 @@ form.addEventListener("submit", (e) => {
 });
 
 //! FIRST RENDER
-renderTodo();
+renderTodo(todos);
 
 //! SAVE TODO
 function saveTodo() {
@@ -236,12 +247,33 @@ function saveTodo() {
 }
 
 //! RENDER TODO
-function renderTodo() {
+function renderTodo(todosFiltered) {
+  if (todos.length === 0) {
+    todosList.innerHTML = `
+    <video
+    src=${
+      body.classList.contains("dark-mode")
+        ? "assets/vid/vid-dark.mp4"
+        : "assets/vid/vid-light.mp4"
+    }
+    class="clip mx-auto d-block"
+    autoplay
+    loop
+    id="video"
+  ></video>
+  <p class="h1 text-center mt-2 list-empty-title">
+    There is nothing to do
+  </p>
+  <p class="h3 text-center fw-bold list-empty-text">Add todo</p>
+  `;
+    return;
+  }
+
   //* Clear container before a re-render
   todosList.innerHTML = "";
 
   //* render todos
-  todos.forEach((el, idx) => {
+  todosFiltered.forEach((el, idx) => {
     todosList.innerHTML += `
   <div
   class="task d-flex align-items-center p-3 mx-2 mx-lg-4 mb-1 rounded-3"
@@ -265,7 +297,11 @@ function renderTodo() {
   />
   <img
     class="cursor-pointer mx-1"
-    src="assets/icon/trash.svg"
+    src=${
+      body.classList.contains("dark-mode")
+        ? "assets/icon/trash-dark.svg"
+        : "assets/icon/trash.svg"
+    }
     alt="delete icon"
     data-action = "delete"
   />
@@ -291,6 +327,10 @@ todosList.addEventListener("click", (e) => {
   action === "edit" && editTodo(todoId);
   //* Delete
   action === "delete" && deleteTodo(todoId);
+
+  if (action === "check") {
+    console.log("hit check");
+  }
 });
 
 //! check a Todo
@@ -313,12 +353,35 @@ todosList.addEventListener("click", (e) => {
 // }
 //* refactored code
 function checkTodo(todoId) {
-  todos = todos.map((el, idx) => ({
-    ...el,
-    checked: idx === todoId ? !el.checked : el.checked,
-  }));
-  renderTodo();
-  //* should add this everywhere we render todo cuz we need update local storage
+  if (filtersArr[0].classList.contains("active")) {
+    console.log(0);
+    todos = todos.map((el, idx) => ({
+      ...el,
+      checked: idx === todoId ? !el.checked : el.checked,
+    }));
+    renderTodo(todos);
+    //* should add this everywhere we render todo cuz we need update local storage
+    // localStorage.setItem("todosList", JSON.stringify(todos));
+  } else if (filtersArr[1].classList.contains("active")) {
+    pendingTodos = pendingTodos.map((el, idx) => ({
+      ...el,
+      checked: idx === todoId ? !el.checked : el.checked,
+    }));
+    console.log(1);
+    console.log(pendingTodos);
+    // pendingTodos = todos.filter(pendingTodos);
+    renderTodo(pendingTodos.filter((el) => el.checked === false)); //* should add this everywhere we render todo cuz we need update local storage
+    // localStorage.setItem("todosList", JSON.stringify(pendingTodos));
+  } else {
+    console.log(2);
+    doneTodos = doneTodos.map((el, idx) => ({
+      ...el,
+      checked: idx === todoId ? !el.checked : el.checked,
+    }));
+    // doneTodos = todos.filter((el) => el.checked === true);
+    renderTodo(doneTodos); //* should add this everywhere we render todo cuz we need update local storage
+    // localStorage.setItem("todosList", JSON.stringify(doneTodos));
+  }
   localStorage.setItem("todosList", JSON.stringify(todos));
 }
 
@@ -336,20 +399,48 @@ function deleteTodo(todoId) {
   //* reset editTodoId to -1
   //* to prevent editing next todo when delete current todo while it was being edited
   editTodoId = -1;
-
+  filterAll.click();
   //* Re-render the list
-  renderTodo();
+  renderTodo(todos);
 
   localStorage.setItem("todosList", JSON.stringify(todos));
 }
 
 //! DarK/light mode
-const theme = document.querySelector("#theme-toggle");
-const body = document.querySelector("body");
 
 theme.addEventListener("click", () => {
   body.classList.toggle("dark-mode");
-  body.classList.contains("dark-mode")
-    ? (theme.src = "assets/icon/moon.svg")
-    : (theme.src = "assets/icon/sun.svg");
+  if (body.classList.contains("dark-mode")) {
+    theme.src = "assets/icon/moon.svg";
+    renderTodo(todos);
+  } else {
+    theme.src = "assets/icon/sun.svg";
+    renderTodo(todos);
+  }
+});
+
+//! FILTER TODOS
+
+filters.forEach((el) => {
+  el.addEventListener("click", (e) => {
+    filters.forEach((el) => el.classList.remove("active"));
+    e.target.classList.add("active");
+  });
+});
+
+filterAll.addEventListener("click", () => {
+  renderTodo(todos);
+  console.log(todos);
+});
+
+filterPending.addEventListener("click", () => {
+  pendingTodos = todos.filter((el) => el.checked === false);
+  console.log(pendingTodos);
+  renderTodo(pendingTodos);
+});
+
+filterDone.addEventListener("click", () => {
+  doneTodos = todos.filter((el) => el.checked === true);
+  console.log(doneTodos);
+  renderTodo(doneTodos);
 });

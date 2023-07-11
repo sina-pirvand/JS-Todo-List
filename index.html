@@ -20,7 +20,7 @@
       <header
         class="header w-100 d-flex align-items-center justify-content-between"
       >
-        <div class="p-2">
+        <div class="p-3">
           <h4 class="mb-0 main-title">JS Todo App</h4>
           <span class="text-secondary-color fw-bold small"
             >10 Tasks pending</span
@@ -41,9 +41,18 @@
 
         <div class="d-flex align-items-center justify-content-between mb-4">
           <ul class="d-flex align-items-center list-unstyled py-2">
-            <li class="px-4 filters cursor-pointer active">All</li>
-            <li class="px-4 filters cursor-pointer">Done</li>
-            <li class="px-4 filters cursor-pointer">Active</li>
+            <li
+              class="px-4 filters cursor-pointer active filter"
+              id="filter-all"
+            >
+              All
+            </li>
+            <li class="px-4 filters cursor-pointer filter" id="filter-pending">
+              pending
+            </li>
+            <li class="px-4 filters cursor-pointer filter" id="filter-done">
+              Done
+            </li>
           </ul>
           <figure class="mx-3 cursor-pointer">
             <img src="assets/icon/sun.svg" alt="light mode" id="theme-toggle" />

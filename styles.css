@@ -54,7 +54,7 @@ body {
 }
 main {
   width: 100%;
-  border-radius: 0 0 1rem 1rem;
+  border-radius: 0;
   height: 100vh;
   overflow: auto;
 }
@@ -115,6 +115,18 @@ main {
 .task.task.checked span {
   color: var(--completed-task-text);
   text-decoration: line-through;
+}
+
+.clip {
+  width: 45%;
+}
+
+.list-empty-title {
+  color: var(--completed-task-text) !important;
+}
+
+.list-empty-text {
+  color: var(--header-color) !important;
 }
 
 /* !form */
