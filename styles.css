@@ -22,6 +22,7 @@
   --active-task-text: #333;
   --completed-task-text: #aaa;
   --form-bg-color: #f8f8f8;
+  --input-text: #555;
 }
 
 /* ! general */
@@ -34,6 +35,7 @@
   --header-color: #31857b;
   --bg-color-primary: #555555;
   --form-bg-color: #666666;
+  --input-text: #eee;
 }
 
 .bg-color-primary {
@@ -139,7 +141,11 @@ main {
 }
 
 input {
-  color: var(--active-task-text);
+  color: var(--input-text);
+}
+
+input::placeholder {
+  color: #aaa;
 }
 
 input:focus {

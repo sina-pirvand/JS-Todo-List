@@ -22,7 +22,7 @@
       >
         <div class="p-3">
           <h4 class="mb-0 main-title">JS Todo App</h4>
-          <span class="text-secondary-color fw-bold small"
+          <span class="text-secondary-color fw-bold small tasks-pending-num"
             >10 Tasks pending</span
           >
         </div>
@@ -40,19 +40,10 @@
         <!-- !-------------------------------------------- -->
 
         <div class="d-flex align-items-center justify-content-between mb-4">
-          <ul class="d-flex align-items-center list-unstyled py-2">
-            <li
-              class="px-4 filters cursor-pointer active filter"
-              id="filter-all"
-            >
-              All
-            </li>
-            <li class="px-4 filters cursor-pointer filter" id="filter-pending">
-              pending
-            </li>
-            <li class="px-4 filters cursor-pointer filter" id="filter-done">
-              Done
-            </li>
+          <ul>
+            <li>all</li>
+            <li>pending</li>
+            <li>done</li>
           </ul>
           <figure class="mx-3 cursor-pointer">
             <img src="assets/icon/sun.svg" alt="light mode" id="theme-toggle" />
@@ -62,7 +53,7 @@
         <!-- !-------------------------------------------- -->
         <!--! Tasks List -->
         <!-- !-------------------------------------------- -->
-        <div class="tasks-list-container">
+        <ul class="tasks-list-container">
           <!-- <div
             class="task d-flex align-items-center p-3 mx-2 mx-lg-4 mb-1 rounded-3"
             id=""
@@ -85,7 +76,7 @@
               alt="delete icon"
             />
           </div> -->
-        </div>
+        </ul>
       </section>
       <div class="new-todo p-2 w-100">
         <form
@@ -110,6 +101,7 @@
     <!--! Scripts -->
     <!-- !-------------------------------------------- -->
 
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
     <script src="scripts.js"></script>
     <script src="/Libs/bootstrap-5.3.0-alpha3-dist/js/bootstrap.bundle.min.js"></script>
   </body>
