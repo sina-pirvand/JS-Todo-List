@@ -23,6 +23,8 @@
   --completed-task-text: #aaa;
   --form-bg-color: #f8f8f8;
   --input-text: #555;
+  ---filters-color: #888;
+  --check-color: #9aff92;
 }
 
 /* ! general */
@@ -36,6 +38,7 @@
   --bg-color-primary: #555555;
   --form-bg-color: #666666;
   --input-text: #eee;
+  ---filters-color: #aaa;
 }
 
 .bg-color-primary {
@@ -61,13 +64,16 @@ main {
   overflow: auto;
 }
 
+.menu {
+  position: sticky;
+  left: 0;
+  top: 0;
+}
+
 .header {
   background-color: var(--header-color);
   border-radius: 0 0 3rem 0;
   padding-bottom: 6rem;
-  position: sticky;
-  left: 0;
-  top: 0;
 }
 
 .main-title {
@@ -89,12 +95,16 @@ main {
 
 /* !section */
 
-.filters {
-  color: var(--text-color-gray);
+.filter {
+  color: var(---filters-color);
 }
 
-.filters.active {
+.filter.active {
   color: var(--title-color);
+}
+
+#order-msg {
+  color: var(--input-text);
 }
 
 .tasks-list-container {
@@ -114,9 +124,25 @@ main {
   background-color: var(--gray-color-secondary);
 }
 
-.task.task.checked span {
+.task.task.checked label {
   color: var(--completed-task-text);
   text-decoration: line-through;
+}
+
+input[type="checkbox"] {
+  width: 25px;
+  height: 20px;
+  border: 1px var(--gray-color-secondary) solid !important;
+}
+
+input[type="checkbox"]:checked {
+  border: none;
+  outline: none;
+  background-color: var(--check-color);
+}
+
+input[type="checkbox"]:focus {
+  box-shadow: none;
 }
 
 .clip {
@@ -158,20 +184,20 @@ input:focus {
 
 @media (min-width: 768px) {
   .tasks-list-container {
-    height: 80vh;
+    height: clamp(55vh, 55vh, 80vh);
+  }
+  input[type="checkbox"] {
+    width: 20px;
   }
 }
 
 @media (min-width: 992px) {
-  main {
-    width: 800px;
-  }
-
   .header {
     border-radius: 1rem 1rem 3rem 0;
   }
 
   main {
+    width: 800px;
     border-radius: 1rem;
     height: 90vh;
   }

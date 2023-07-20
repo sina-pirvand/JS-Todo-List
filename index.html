@@ -17,61 +17,47 @@
     <main
       class="mx-auto bg-color-primary position-relative d-flex flex-column justify-content-between"
     >
-      <header
-        class="header w-100 d-flex align-items-center justify-content-between"
-      >
-        <div class="p-3">
-          <h4 class="mb-0 main-title">JS Todo App</h4>
-          <span class="text-secondary-color fw-bold small tasks-pending-num"
-            >10 Tasks pending</span
+      <section class="menu">
+        <header
+          class="header w-100 d-flex align-items-center justify-content-between"
+        >
+          <div class="p-3">
+            <h4 class="mb-0 main-title">JS Todo App</h4>
+            <span class="text-secondary-color fw-bold small tasks-pending-num"
+              >10 Tasks pending</span
+            >
+          </div>
+          <div class="p-1 rounded-circle mx-2 profile-img-container">
+            <img
+              class="profile-img rounded-circle"
+              src="assets/img/bg.jpg"
+              alt="profile photo"
+            />
+          </div>
+        </header>
+        <div class="d-flex align-items-center justify-content-between mb-4">
+          <ul
+            class="d-flex align-items-baseline gap-4 gap-lg-5 mt-2 list-unstyled px-2 px-lg-4"
           >
-        </div>
-        <div class="p-1 rounded-circle mx-2 profile-img-container">
-          <img
-            class="profile-img rounded-circle"
-            src="assets/img/bg.jpg"
-            alt="profile photo"
-          />
-        </div>
-      </header>
-      <section class="w-100 bg-color-primary">
-        <!-- !-------------------------------------------- -->
-        <!-- !Filters & theme mode -->
-        <!-- !-------------------------------------------- -->
-
-        <div class="d-flex align-items-center justify-content-end mb-4">
+            <li class="filter active cursor-pointer" id="all">All</li>
+            <li class="filter cursor-pointer" id="pending">Pending</li>
+            <li class="filter cursor-pointer" id="completed">Completed</li>
+          </ul>
           <figure class="mx-3 cursor-pointer">
             <img src="assets/icon/sun.svg" alt="light mode" id="theme-toggle" />
           </figure>
         </div>
+      </section>
+      <section class="w-100 bg-color-primary">
+        <h6 class="text-center" id="order-msg">drag & drop to reorder list</h6>
+        <!-- !-------------------------------------------- -->
+        <!-- !Filters & theme mode -->
+        <!-- !-------------------------------------------- -->
 
         <!-- !-------------------------------------------- -->
         <!--! Tasks List -->
         <!-- !-------------------------------------------- -->
-        <ul class="tasks-list-container">
-          <!-- <div
-            class="task d-flex align-items-center p-3 mx-2 mx-lg-4 mb-1 rounded-3"
-            id=""
-          >
-            <img
-              class="cursor-pointer"
-              src="assets/icon/circle.svg"
-              alt="circle"
-            />
-            <span class="mx-2 cursor-pointer w-100">task ...</span>
-
-            <img
-              class="cursor-pointer ml-auto"
-              src="assets/icon/edit.svg"
-              alt="edit icon"
-            />
-            <img
-              class="cursor-pointer mx-1"
-              src="assets/icon/trash.svg"
-              alt="delete icon"
-            />
-          </div> -->
-        </ul>
+        <ul class="tasks-list-container p-0 m-0"></ul>
       </section>
       <div class="new-todo p-2 w-100">
         <form
