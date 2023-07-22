@@ -7,6 +7,7 @@ const test = document.querySelector(".tasks-list-container:first-child");
 const filters = document.querySelectorAll(".filter");
 const theme = document.querySelector("#theme-toggle");
 const body = document.querySelector("body");
+const notif = document.querySelector(".notif");
 
 //! VARIABLES
 let todos = JSON.parse(localStorage.getItem("todos-list")) || [];
@@ -15,6 +16,9 @@ let isEdited = false;
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
+  if (!todoInp.value) {
+    showNotif("Todo is empty");
+  }
 });
 
 todoInp.addEventListener("keyup", (e) => {
@@ -25,7 +29,7 @@ todoInp.addEventListener("keyup", (e) => {
   //* enter pressed and input value isn't empty
   if (e.key === "Enter" && inputVal) {
     if (isDuplicate) {
-      alert("Duplicate todo");
+      showNotif("Todo is duplicate");
     }
     //* if isEdited isn't true
     else if (!isEdited) {
@@ -36,7 +40,9 @@ todoInp.addEventListener("keyup", (e) => {
       isEdited = false;
       todos[editId].name = inputVal;
     }
-    todoInp.value = "";
+    if (!isDuplicate) {
+      todoInp.value = "";
+    }
 
     filters[0].click();
     localStorage.setItem("todos-list", JSON.stringify(todos));
@@ -47,7 +53,28 @@ todoInp.addEventListener("keyup", (e) => {
 showTodo("all");
 
 function showTodo(filter) {
-  todosList.innerHTML = "";
+  if (todos.length !== 0) {
+    todosList.innerHTML = `<h6 class="text-center" id="order-msg">drag & drop to reorder list</h6>`;
+  } else {
+    todosList.innerHTML = `
+<div
+class="d-flex flex-column align-items-center justify-content-center"
+>
+<video
+  class="clip mb-3"
+  src=${
+    body.classList.contains("dark-mode")
+      ? "assets/vid/vid-dark.mp4"
+      : "assets/vid/vid-light.mp4"
+  }
+  loop
+  autoplay
+></video>
+<span class="h4" id="no-todo-text">There Is No Todo Here</span>
+<span class="h2 fw-bold" id="add-todo-text">Add Todo</span>
+</div>
+`;
+  }
   todos.forEach((el, idx) => {
     let isCompleted = el.status === "completed" ? "checked" : "";
     if (filter === el.status || filter === "all") {
@@ -141,3 +168,20 @@ const sortable = Sortable.create(
     animation: 300,
   }
 );
+
+//! NOTIFICATION
+
+function showNotif(msg) {
+  notif.innerHTML = `
+  <img class="" src="${
+    body.classList.contains("dark-mode")
+      ? "assets/icon/warning-dark.svg"
+      : "assets/icon/warning-light.svg"
+  }" alt="warning icon" />
+  <span class="text-nowrap">${msg}</span>
+`;
+  notif.classList.add("active");
+  setTimeout(() => {
+    notif.classList.remove("active");
+  }, 2200);
+}
