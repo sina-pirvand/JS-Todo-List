@@ -13,6 +13,7 @@
 }
 
 :root {
+  --body-color: #ececec;
   --header-color: #b236ec;
   --title-color: #ffbb53;
   --gray-color-secondary: #ddd;
@@ -34,6 +35,7 @@
 }
 
 .dark-mode {
+  --body-color: #787878;
   --header-color: #31857b;
   --bg-color-primary: #555555;
   --form-bg-color: #666666;
@@ -56,6 +58,7 @@
 /* ! header */
 body {
   overflow: hidden;
+  background-color: var(--body-color) !important;
 }
 main {
   width: 100%;

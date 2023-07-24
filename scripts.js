@@ -88,7 +88,7 @@ class="d-flex flex-column align-items-center justify-content-center"
       >
       <img
       //* because of "", our argument must be in '' otherwise we'll face an error
-        onclick="editTodo(${idx},'${el.name}')"
+      onclick="editTodo(${idx},'${el.name}')"
         class="cursor-pointer ml-auto"
         src="assets/icon/edit.svg"
         alt="edit icon"
